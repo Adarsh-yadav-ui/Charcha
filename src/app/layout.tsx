@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import ConvexClientProvider from "@/providers/ConvexProviderWithClerk";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -8,10 +11,11 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "Charcha",
-  description: "A modern Indian social platform where conversations flow freely. Share your thoughts, connect with people, and be heard.",
+  description:
+    "A modern Indian social platform where conversations flow freely. Share your thoughts, connect with people, and be heard.",
   icons: {
-    icon: "/logo.svg"
-  }
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -20,9 +24,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
       <body className={`${dmSans.style} ${dmSans.className} antialiased`}>
-        {children}
+        <ClerkProvider>
+          <ConvexClientProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
