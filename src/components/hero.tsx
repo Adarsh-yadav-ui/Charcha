@@ -1,34 +1,27 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Users, Zap, ArrowRight } from "lucide-react";
 import { TweetSection } from "./tweetCard";
 
 export const HeroSection = () => {
   return (
-    <main className="relative overflow-hidden bg-linear-to-br from-purple-50 via-blue-50 to-cyan-50 py-8 sm:py-12 md:py-16 lg:py-24">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-purple-300 rounded-full blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-blue-300 rounded-full blur-3xl opacity-20 animate-pulse delay-1000" />
-      </div>
-
+    <main className="relative overflow-hidden py-8 sm:py-12 md:py-16 lg:py-24 dark:bg-[#202122]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-10 lg:gap-12 relative z-10">
           {/* Content Section */}
           <div className="flex-1 space-y-4 sm:space-y-6 md:space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-linear-to-r from-purple-100 to-blue-100 text-purple-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium border border-purple-200">
+            <div className="inline-flex items-center gap-2 bg-linear-to-r from-purple-100 to-blue-100 text-black px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium border border-black">
               <Zap className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>Where conversations come alive</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold  leading-tight">
               Connect, Share,{" "}
               <span className="bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 Engage
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-500 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Join the conversation. Share your thoughts in threads, connect
               with friends through messages, and be part of a vibrant community
               that never stops talking.
@@ -40,7 +33,7 @@ export const HeroSection = () => {
                 <div className="bg-purple-100 rounded-full p-2">
                   <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">
+                <span className="text-sm sm:text-base font-medium">
                   Real-time messaging with friends
                 </span>
               </div>
@@ -48,7 +41,7 @@ export const HeroSection = () => {
                 <div className="bg-blue-100 rounded-full p-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">
+                <span className="text-sm sm:text-base font-medium">
                   Thread conversations that matter
                 </span>
               </div>
@@ -56,7 +49,7 @@ export const HeroSection = () => {
                 <div className="bg-cyan-100 rounded-full p-2">
                   <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" />
                 </div>
-                <span className="text-sm sm:text-base text-slate-700 font-medium">
+                <span className="text-sm sm:text-base font-medium">
                   Stay updated with trending topics
                 </span>
               </div>

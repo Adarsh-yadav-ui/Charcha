@@ -1,10 +1,10 @@
 "use client";
 
-import { Hexagon, Github, Twitter } from "lucide-react";
+import { Github, Twitter } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { motion } from "framer-motion";
 import { HeroSection } from "@/components/hero";
-import { SimpleHeader } from "@/components/simple-header";
+import { Navbar } from "@/components/navbar";
 import Image from "next/image";
 
 export default function LandingPage() {
@@ -15,7 +15,7 @@ export default function LandingPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0 }}
       >
-        <SimpleHeader />
+        <Navbar />
       </motion.div>
 
       <motion.div
