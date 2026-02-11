@@ -15,7 +15,34 @@ export const getUsers = query({
   },
 });
 
-export const get = query({
+// users.ts
+export const updateProfile = mutation({
+  args: {
+    firstName: v.optional(v.string()),
+    lastName: v.optional(v.string()),
+    username: v.optional(v.string()),
+    bio: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Unauthorized");
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("byClerkUserId", (q) => q.eq("clerkUserId", identity.subject))
+      .unique();
+
+    if (!user) throw new Error("User not found");
+
+    await ctx.db.patch(user._id, {
+      ...args,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
+export const getUserById = query({
   args: { id: v.id("users") },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.id);
@@ -74,7 +101,7 @@ export const deleteFromClerk = internalMutation({
       await ctx.db.delete(user._id);
     } else {
       console.warn(
-        `Can't delete user, there is none for Clerk user ID: ${clerkUserId}`
+        `Can't delete user, there is none for Clerk user ID: ${clerkUserId}`,
       );
     }
   },
@@ -96,7 +123,7 @@ export async function getCurrentUser(ctx: QueryCtx) {
 
 async function userByClerkUserId(
   ctx: QueryCtx | MutationCtx,
-  clerkUserId: string
+  clerkUserId: string,
 ) {
   return await ctx.db
     .query("users")

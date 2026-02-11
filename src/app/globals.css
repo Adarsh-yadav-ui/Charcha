@@ -123,10 +123,6 @@
     @apply bg-background text-foreground;
   }
 }
-
-@import "tailwindcss";
-@import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -148,7 +144,8 @@
 }
 
 .dark {
-  --background: oklch(26.58% 0.0737 283.96);
+  --background: #111111;
+
   --secondary-background: oklch(23.93% 0 0);
   --foreground: oklch(92.49% 0 0);
   --main-foreground: oklch(0% 0 0);
@@ -208,4 +205,9 @@
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+
+html,body {
+  height: 100%
 }

@@ -28,14 +28,8 @@ export default function RootLayout({
       <body className={`${dmSans.style} ${dmSans.className} antialiased`}>
         <ClerkProvider>
           <ConvexClientProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
+    
               {children}
-            </ThemeProvider>
           </ConvexClientProvider>
         </ClerkProvider>
       </body>
