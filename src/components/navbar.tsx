@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated, useQuery } from "convex/react";
-import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
+// import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { api } from "../../convex/_generated/api";
 
 export function Navbar() {
@@ -86,7 +86,7 @@ export function Navbar() {
             </Link>
             <UserButton />
           </Authenticated>
-          <AnimatedThemeToggler />
+          {/* <AnimatedThemeToggler /> */}
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
@@ -178,7 +178,7 @@ export function Navbar() {
 
                   {/* Theme Toggle Section */}
                   <div className="shrink-0">
-                    <AnimatedThemeToggler className="hover:border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-sm transition-all duration-200 cursor-pointer p-2" />
+                    {/* <AnimatedThemeToggler className="hover:border-2 border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-sm transition-all duration-200 cursor-pointer p-2" /> */}
                   </div>
                 </div>
               </Authenticated>
