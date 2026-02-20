@@ -1,17 +1,30 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 // All comments for a specific post
 export const getComments = query({
   args: {
-    postId: v.id("post"),
+    postId: v.id("posts"),
   },
   handler: async (ctx, args) => {
-    return await ctx.db
+    const comments = await ctx.db
       .query("comments")
       .withIndex("byPost", (q) => q.eq("post", args.postId))
       .order("desc")
       .collect();
+
+    const commentsWithInfo = await Promise.all(
+      comments.map(async (comment) => {
+        const author = await ctx.db.get(comment.author);
+        return {
+          ...comment,
+          author,
+        };
+      }),
+    );
+
+    return commentsWithInfo;
   },
 });
 
@@ -31,7 +44,7 @@ export const getCommentsForUser = query({
 
 // Fetching Post by ID
 export const getCommentForPost = query({
-  args: { postId: v.id("post") },
+  args: { postId: v.id("posts") },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.postId);
   },
@@ -39,7 +52,7 @@ export const getCommentForPost = query({
 
 export const createComment = mutation({
   args: {
-    post: v.id("post"),
+    post: v.id("posts"),
     author: v.id("users"),
     content: v.string(),
   },

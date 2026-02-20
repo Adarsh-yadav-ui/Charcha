@@ -1,118 +1,91 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
+"use client";
+
+import { PostUploadDialog } from "@/components/postUploadDialog";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { formatRelativeTime } from "@/hooks/use-format-date";
+import { BarChart3, Heart, MessageCircle, Repeat2 } from "lucide-react";
+import Image from "next/image";
 
 export default function DashboardPage() {
+  const currentUser = useQuery(api.users.current);
+  const getAllPosts = useQuery(api.posts.getAllPosts);
   return (
     <div className="space-y-8">
-     
+      <PostUploadDialog />
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-white dark:bg-zinc-900 border-2 border-black shadow-[4px_4px_0_0_#000]">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+      {getAllPosts?.map((post) => (
+        <Card className="min-h-fit max-w-160" key={post?._id}>
+          <CardHeader className="flex items-center">
+            <CardTitle>
+              <Avatar className="h-10 w-10">
+                <AvatarImage
+                  src={currentUser?.imageUrl}
+                  alt={`${currentUser?.firstName} ${currentUser?.lastName}`}
+                />
+                <AvatarFallback>
+                  {currentUser?.firstName
+                    ?.slice(0, 1)
+                    .concat(currentUser?.lastName?.slice(0, 1) ?? "Hell") ||
+                    "?"}
+                </AvatarFallback>
+              </Avatar>
+            </CardTitle>
+            <CardDescription className="ml-2 font-bold text-md">
+              {currentUser?.firstName} {currentUser?.lastName}
+              <span className="text-xs text-muted-foreground">{` · ${formatRelativeTime(post?.updatedAt ?? 0)}`}</span>
+              <p className="text-sm font-normal text-muted-foreground">
+                {currentUser?.email && `@${currentUser.email.split("@")[0]}`}
+              </p>
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">
-              +20.1% from last month
-            </p>
+            {post?.content} {post?.edited ? "edited" : ""}{" "}
+            {post?.attachments?.length
+              ? `(${post?.attachments?.length} attachments)`
+              : ""}
+            {post?.attachments?.map((attachment, index) => (
+              <img
+                key={index}
+                src={attachment}
+                alt={`Attachment ${index + 1}`}
+                height={536}
+                width={354}
+                className="m-2 h-fit w-fit"
+              />
+            ))}
           </CardContent>
+
+          <CardFooter className="flex-row gap-2">
+            <Button className="w-full" variant="neutral">
+              Comment <MessageCircle />
+            </Button>
+            <Button className="w-full" variant="neutral">
+              Reply <Repeat2 />
+            </Button>
+            <Button className="w-full" variant="neutral">
+              Like <Heart />
+            </Button>
+            <Button className="w-full" variant="neutral">
+              Views <BarChart3 />
+            </Button>
+          </CardFooter>
         </Card>
-        <Card className="bg-white dark:bg-zinc-900 border-2 border-black shadow-[4px_4px_0_0_#000]">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            <p className="text-xs text-muted-foreground">
-              +180.1% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="bg-white dark:bg-zinc-900 border-2 border-black shadow-[4px_4px_0_0_#000]">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sales</CardTitle>
-            <CreditCard className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground">
-              +19% from last month
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="bg-white dark:bg-zinc-900 border-2 border-black shadow-[4px_4px_0_0_#000]">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+573</div>
-            <p className="text-xs text-muted-foreground">
-              +201 since last hour
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4 bg-white dark:bg-zinc-900 border-2 border-black shadow-[8px_8px_0_0_#000]">
-          <CardHeader>
-            <CardTitle>Overview</CardTitle>
-          </CardHeader>
-          <CardContent className="pl-2">
-            <div className="h-[200px] flex items-center justify-center text-muted-foreground">
-              Chart Placeholder
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="col-span-3 bg-white dark:bg-zinc-900 border-2 border-black shadow-[8px_8px_0_0_#000]">
-          <CardHeader>
-            <CardTitle>Recent Sales</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-8">
-              <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Olivia Martin
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    olivia.martin@email.com
-                  </p>
-                </div>
-                <div className="ml-auto font-medium">+$1,999.00</div>
-              </div>
-              <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Jackson Lee
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    jackson.lee@email.com
-                  </p>
-                </div>
-                <div className="ml-auto font-medium">+$39.00</div>
-              </div>
-              <div className="flex items-center">
-                <div className="ml-4 space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Isabella Nguyen
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    isabella.nguyen@email.com
-                  </p>
-                </div>
-                <div className="ml-auto font-medium">+$299.00</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      ))}
     </div>
   );
 }
