@@ -1,181 +1,36 @@
-# 🟠 Charcha
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> A modern real-time social platform inspired by meaningful conversations.
+## Getting Started
 
-Charcha is a full-stack social media application inspired by community-driven discussions.  
-Built with scalability, real-time updates, and clean architecture in mind.
-
----
-
-## 🌟 Vision
-
-Charcha aims to create a minimal, fast, and modern platform for sharing thoughts, building discussions, and connecting people — with a subtle Indian identity and clean design philosophy.
-
----
-
-## ✨ Features
-
-### 📝 Posts
-- Create and share posts
-- Threaded replies
-- Like system
-- Real-time feed updates
-
-### 👤 Profiles
-- User profiles
-- Profile image
-- User activity tracking
-
-### 🖼 Media
-- Image uploads
-- Optimized delivery
-- Secure storage handling
-
-### 💬 Direct Messages
-- Real-time messaging
-- Typing indicators
-- Private conversations
-- Auto reconnect
-
-### 🔔 Notifications (Planned)
-- Like notifications
-- Reply notifications
-- Mention alerts
-
----
-
-## 🏗 Architecture Overview
-
-```
-Next.js (Frontend)
-│
-├── Convex → Database + Real-time backend
-├── EdgeStore → Media storage
-└── Socket.IO → Direct messaging system
-```
-
-This architecture ensures:
-- Clean separation of concerns
-- Real-time responsiveness
-- Scalable backend logic
-- Modern development workflow
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js (App Router) |
-| Styling | Tailwind CSS |
-| Backend | Convex |
-| Storage | EdgeStore |
-| Real-time Messaging | Socket.IO |
-
----
-
-## 📂 Project Structure
-
-```
-charcha/
-├── app/                # Routes and pages
-├── components/         # Reusable UI components
-├── convex/             # Backend functions & schema
-├── lib/                # Utilities and helpers
-├── public/             # Static assets
-├── styles/             # Global styles
-└── README.md
-```
-
----
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/yourusername/charcha.git
-cd charcha
-```
-
-### 2️⃣ Install Dependencies
-
-```bash
-npm install
-```
-
-### 3️⃣ Setup Environment Variables
-
-Create a `.env.local` file:
-
-```
-CONVEX_DEPLOYMENT=
-NEXT_PUBLIC_CONVEX_URL=
-
-EDGE_STORE_ACCESS_KEY=
-
-SOCKET_SERVER_URL=
-```
-
-### 4️⃣ Run Development Server
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open:  
-http://localhost:3000
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 🚀 Development Phases
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Phase 1
-- Authentication
-- Post creation
-- Feed system
-- Profile pages
+## Learn More
 
-### Phase 2
-- Image upload integration
-- UI refinements
-- Performance improvements
+To learn more about Next.js, take a look at the following resources:
 
-### Phase 3
-- Real-time Direct Messages
-- Notifications
-- Production deployment
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 🎯 Learning Goals
+## Deploy on Vercel
 
-This project focuses on:
-- Real-time system design
-- Clean full-stack architecture
-- Scalable database modeling
-- File upload pipelines
-- Production-ready frontend structure
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
----
-
-## 🔮 Future Improvements
-
-- Post editing
-- Hashtag system
-- Advanced search
-- Mobile optimization
-- Progressive Web App (PWA)
-- Content moderation tools
-
----
-
-## 📜 License
-
-MIT License
-
----
-
-## 👨‍💻 Author
-
-Built with passion and curiosity by a young developer exploring modern full-stack engineering.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

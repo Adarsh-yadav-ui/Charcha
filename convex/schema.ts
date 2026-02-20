@@ -34,16 +34,13 @@ export default defineSchema({
 
   comments: defineTable({
     post: v.id("posts"),
-    author: v.id("users"),                            
+    author: v.id("users"),
     content: v.string(),
-    createdAt: v.number(), // NEW
-    updatedAt: v.number(), // NEW
     edited: v.optional(v.boolean()), // NEW
     deletedAt: v.optional(v.number()), // NEW
   })
     .index("byPost", ["post"])
-    .index("byAuthor", ["author"])
-    .index("byPostAndCreatedAt", ["post", "createdAt"]), // NEW
+    .index("byAuthor", ["author"]),
 
   likes: defineTable({
     post: v.id("posts"),
