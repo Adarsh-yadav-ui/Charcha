@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import ConvexClientProvider from "@/providers/ConvexProviderWithClerk";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { EdgeStoreProvider } from "../lib/edgestore";
+import { Toaster } from "sonner";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`${dmSans.style} ${dmSans.className} antialiased`}>
         <ClerkProvider>
           <ConvexClientProvider>
+            <Toaster position="bottom-right" />
             <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </ConvexClientProvider>
         </ClerkProvider>
