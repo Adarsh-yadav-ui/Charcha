@@ -59,4 +59,10 @@ export default defineSchema({
     .index("byFollower", ["follower"])
     .index("byFollowing", ["following"])
     .index("byFollowerAndFollowing", ["follower", "following"]), // NEW
+
+  cognition: defineTable({
+    ask: v.string(),
+    response: v.any(),
+    createdAt: v.number(),
+  }),
 });

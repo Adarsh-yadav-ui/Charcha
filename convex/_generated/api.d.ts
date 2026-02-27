@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as cognition from "../cognition.js";
 import type * as comments from "../comments.js";
 import type * as followers from "../followers.js";
 import type * as http from "../http.js";
@@ -22,6 +23,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  cognition: typeof cognition;
   comments: typeof comments;
   followers: typeof followers;
   http: typeof http;
